@@ -16,4 +16,5 @@ if st.button("Predict Waiting Time"):
     
     prediction = model.predict([[people, counters, service]])
     
+
     st.success(f"Estimated Waiting Time: {prediction[0]:.2f} minutes")
