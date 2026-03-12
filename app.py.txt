@@ -1,0 +1,19 @@
+import streamlit as st
+import pickle
+
+# load trained model
+model = pickle.load(open("queue_model.pkl","rb"))
+
+st.title("AI Smart Queue Waiting Time Predictor")
+
+place = st.selectbox("Select Location", ["Hospital","Bank"])
+
+people = st.number_input("People Ahead", 1, 100)
+counters = st.number_input("Number of Counters", 1, 10)
+service = st.number_input("Average Service Time (minutes)", 1, 20)
+
+if st.button("Predict Waiting Time"):
+    
+    prediction = model.predict([[people, counters, service]])
+    
+    st.success(f"Estimated Waiting Time: {prediction[0]:.2f} minutes")
